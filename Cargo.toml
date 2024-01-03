@@ -6,20 +6,34 @@ name = "stm32-test1"
 version = "0.1.0"
 
 [dependencies]
-cortex-m-rt = "*"
-panic-probe = "*"
-cortex-m = { version = "*", features = ["critical-section-single-core"] }
-defmt = "*"
-defmt-rtt = "*"
+# cortex-m-rt = "*"
+# panic-probe = "*"
+# cortex-m = { version = "*", features = ["critical-section-single-core"] }
+# defmt = "*"
+# defmt-rtt = "*"
 
 embassy-stm32 = { version = "*", features = ["defmt", "time-driver-any", "stm32f411re", "memory-x", "unstable-pac", "exti"] }
-embassy-executor = { version = "*", features = ["nightly", "arch-cortex-m", "executor-thread", "defmt", "integrated-timers"] }
-embassy-time = { version = "*", features = ["defmt", "defmt-timestamp-uptime", "tick-hz-32_768"] }
+# embassy-executor = { version = "*", features = ["nightly", "arch-cortex-m", "executor-thread", "defmt", "integrated-timers"] }
+# embassy-time = { version = "*", features = ["defmt", "defmt-timestamp-uptime", "tick-hz-32_768"] }
+
+cortex-m = "*"
+cortex-m-rt = "*"
+embedded-hal = "*"
+embedded-io = { version = "0.6.0" }
+embedded-io-async = { version = "0.6.1" }
+panic-probe = { version = "0.3", features = ["print-defmt"] }
+futures = { version = "0.3.17", default-features = false, features = ["async-await"] }
+heapless = { version = "0.8", default-features = false }
+nb = "1.0.0"
+embedded-storage = "0.3.1"
+micromath = "2.0.0"
+static_cell = "2"
+chrono = { version = "^0.4", default-features = false}
 
 [patch.crates-io]
 embassy-stm32 = { git = "https://github.com/embassy-rs/embassy" }
-embassy-executor = { git = "https://github.com/embassy-rs/embassy" }
-embassy-time = { git = "https://github.com/embassy-rs/embassy" }
+# embassy-executor = { git = "https://github.com/embassy-rs/embassy" }
+# embassy-time = { git = "https://github.com/embassy-rs/embassy" }
 
 [[bin]]
 name = "stm32-test1"
