@@ -1,24 +1,22 @@
-[workspace]
-resolver = "2"
-
 [package]
 authors = ["me"]
-edition = "2018"
+edition = "2021"
 readme = "README.md"
 name = "stm32-test1"
 version = "0.1.0"
 
 [dependencies]
+cortex-m = { version = "*", features = ["critical-section-single-core"] }
+cortex-m-rt = "*"
+panic-probe = { version = "*", features = ["print-defmt"] }
+
+defmt = "*"
+defmt-rtt = "*"
+
 embassy-stm32 = { version = "*", features = ["defmt", "time-driver-any", "stm32f411re", "memory-x", "unstable-pac", "exti"] }
 embassy-executor = { version = "*", features = ["nightly", "arch-cortex-m", "executor-thread", "defmt", "integrated-timers"] }
 embassy-time = { version = "*", features = ["defmt", "defmt-timestamp-uptime", "tick-hz-32_768"] }
 
-cortex-m = { version = "*", features = ["critical-section-single-core"] }
-cortex-m-rt = "*"
-defmt = "*"
-defmt-rtt = "*"
-
-panic-probe = { version = "*", features = ["print-defmt"] }
 # embedded-io = { version = "*" }
 # embedded-io-async = { version = "*" }
 # futures = { version = "*", default-features = false, features = ["async-await"] }
