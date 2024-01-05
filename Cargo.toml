@@ -23,7 +23,7 @@ embassy-time = { version = "*", features = ["defmt", "defmt-timestamp-uptime", "
 # heapless = { version = "*", default-features = false }
 # embedded-storage = "*"
 # micromath = "*"
-# static_cell = "*"
+static_cell = "*"
 # chrono = { version = "*", default-features = false}
 
 [patch.crates-io]
