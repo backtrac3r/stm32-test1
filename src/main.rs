@@ -27,7 +27,7 @@ async fn main(spawner: Spawner) {
     // let button = ExtiInput::new(Input::new(p.PC13, Pull::Up), p.EXTI13);
 
     let pwm_pin = PwmPin::new_ch1(p.PA6, OutputType::PushPull);
-    let mut pwm: SimplePwm<'static, TIM3> = SimplePwm::new(
+    let pwm: SimplePwm<'static, TIM3> = SimplePwm::new(
         p.TIM3,
         Some(pwm_pin),
         None,
@@ -36,7 +36,6 @@ async fn main(spawner: Spawner) {
         hz(50),
         CountingMode::EdgeAlignedUp,
     );
-    pwm.enable(Channel::Ch1);
 
     // let motor = StepperMotor::new(
     //     Output::new(p.PA0, Level::Low, Speed::Medium),
@@ -48,6 +47,9 @@ async fn main(spawner: Spawner) {
 
     // unwrap!(spawner.spawn(motor_driver(motor, button)));
     unwrap!(spawner.spawn(servo_driver(pwm)));
+    // loop {
+    //     Timer::after_millis(1000).await;
+    // }
 }
 
 // #[embassy_executor::task]
@@ -62,14 +64,13 @@ async fn main(spawner: Spawner) {
 #[embassy_executor::task]
 async fn servo_driver(mut pwm: SimplePwm<'static, TIM3>) {
     let max_duty = pwm.get_max_duty();
+    pwm.enable(Channel::Ch1);
 
     loop {
-        pwm.set_duty(Channel::Ch1, max_duty / 2);
-        pwm.enable(Channel::Ch1);
-        Timer::after_millis(250).await;
+        pwm.set_duty(Channel::Ch1, max_duty / 15);
+        Timer::after_millis(500).await;
 
-        pwm.set_duty(Channel::Ch1, 0);
-        pwm.enable(Channel::Ch1);
-        Timer::after_millis(250).await;
+        pwm.set_duty(Channel::Ch1, max_duty / 10);
+        Timer::after_millis(500).await;
     }
 }
